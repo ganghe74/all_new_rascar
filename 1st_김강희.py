@@ -1,14 +1,12 @@
 #########################################################################
 # Date: 2018/10/02
-# file name: 3rd_assignment_main.py
-# Purpose: this code has been generated for the 4 wheel drive body
-# moving object to perform the project with line detector
+# file name: 1st_assignment_main.py
+# Purpose: this code has been generated for the 4 wheels drive body
+# moving object to perform the project with ultra sensor
 # this code is used for the student only
 #########################################################################
-
 from car import Car
 import time
-
 
 class myCar(object):
 
@@ -19,13 +17,22 @@ class myCar(object):
         self.car.drive_parking()
 
     # =======================================================================
-    # 3RD_ASSIGNMENT_CODE
-    # Complete the code to perform Third Assignment
+    # 1ST_ASSIGNMENT_CODE
+    # Complete the code to perform First Assignment
     # =======================================================================
     def car_startup(self):
-        # implement the assignment code here
-        pass
-
+        # Implement the assignment code here.
+        self.car.steering.center_alignment()
+        for speed, distance in [[30,15], [50,20], [70,25]]:
+            self.car.accelerator.go_forward(speed)
+            while self.car.distance_detector.get_distance() > distance:
+                continue
+            self.car.accelerator.stop()
+            time.sleep(0.5)
+            self.car.accelerator.go_backward(speed)
+            time.sleep(4)
+            self.car.accelerator.stop()
+        self.drive_parking()
 
 if __name__ == "__main__":
     try:
